@@ -1,0 +1,323 @@
+/* Primitivas compartilhadas: estado, selo, painel e modal. */
+
+/* ---------- Selo de estado ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  padding: 2px var(--fc-space-2);
+  border: 1px solid var(--fc-neutral-line);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-neutral-bg);
+  color: var(--fc-neutral);
+  font-size: var(--fc-text-meta);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badgeMark {
+  width: 8px;
+  height: 8px;
+  border: 2px solid currentColor;
+  flex: none;
+}
+
+.success {
+  background: var(--fc-normal-bg);
+  border-color: var(--fc-normal-line);
+  color: var(--fc-normal);
+}
+.success .badgeMark { background: currentColor; }
+
+.warning {
+  background: var(--fc-attention-bg);
+  border-color: var(--fc-attention-line);
+  color: var(--fc-attention);
+}
+.warning .badgeMark { transform: rotate(45deg); }
+
+.danger {
+  background: var(--fc-critical-bg);
+  border-color: var(--fc-critical-line);
+  color: var(--fc-critical);
+}
+.danger .badgeMark { border-radius: 50%; background: currentColor; }
+
+.info {
+  background: var(--fc-info-bg);
+  border-color: var(--fc-info-line);
+  color: var(--fc-info);
+}
+
+.neutral {
+  background: var(--fc-neutral-bg);
+  border-color: var(--fc-neutral-line);
+  color: var(--fc-neutral);
+}
+
+/* ---------- Estado assíncrono ---------- */
+.state {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-3);
+  align-items: flex-start;
+  padding: var(--fc-space-6);
+  border: var(--fc-border);
+  border-left: 4px solid var(--fc-line-strong);
+  background: var(--fc-white);
+  /* Reserva de espaço para não deslocar o conteúdo ao carregar. */
+  min-height: 148px;
+  justify-content: center;
+}
+
+.stateCompact {
+  min-height: 96px;
+  padding: var(--fc-space-4);
+}
+
+.stateLoading { border-left-color: var(--fc-blue-500); }
+.stateError { border-left-color: var(--fc-critical); background: var(--fc-critical-bg); }
+.stateEmpty { border-left-color: var(--fc-line-strong); }
+
+.stateTitle {
+  font-size: var(--fc-text-lead);
+  font-weight: 700;
+  color: var(--fc-ink-strong);
+}
+
+.stateMessage {
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+  max-width: 64ch;
+}
+
+.stateRow {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-3);
+  width: 100%;
+}
+
+/* A barra ocupa a largura toda: numa espera longa, um traço de 132px lê como
+   enfeite; a faixa cheia lê como "o sistema está trabalhando nisto". */
+.stateBar {
+  width: 100%;
+  height: 4px;
+  background: var(--fc-surface-sunken);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.stateBar::after {
+  content: "";
+  display: block;
+  width: 35%;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--fc-blue-500);
+  animation: fc-progress 1.4s ease-in-out infinite;
+}
+
+@keyframes fc-progress {
+  from { transform: translateX(-110%); }
+  to { transform: translateX(300%); }
+}
+
+.stateSpinner {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 2px solid var(--fc-line);
+  border-top-color: var(--fc-blue-500);
+  border-radius: 50%;
+  animation: fc-spin 0.9s linear infinite;
+}
+
+@keyframes fc-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Tempo decorrido: discreto, alinhado à direita, para não competir com o
+   título mas responder "faz quanto tempo?" sem o operador ter que adivinhar. */
+.stateElapsed {
+  margin-left: auto;
+  font-size: var(--fc-text-meta);
+  font-weight: 600;
+  color: var(--fc-ink-faint);
+}
+
+/* ---------- Esqueleto ---------- */
+
+.skeletonCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--fc-space-3);
+  width: 100%;
+}
+
+.skeletonRows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+  width: 100%;
+}
+
+.skeletonBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-3);
+  border: var(--fc-border-soft);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-surface);
+}
+
+.skeletonLine {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--fc-surface-sunken);
+  animation: fc-skeleton 1.6s ease-in-out infinite;
+}
+
+.skeletonLineShort { width: 42%; }
+.skeletonLineFigure { width: 64%; height: 20px; }
+
+@keyframes fc-skeleton {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+/* ---------- Botões ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fc-space-2);
+  min-height: var(--fc-touch-target);
+  padding: 0 var(--fc-space-4);
+  border: 1px solid var(--fc-navy-700);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-navy-700);
+  color: var(--fc-ink-inverse);
+  font-size: var(--fc-text-body);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.button:hover:not(:disabled) { background: var(--fc-navy-600); border-color: var(--fc-navy-600); }
+.button:disabled { opacity: 0.45; }
+
+.buttonSecondary {
+  background: var(--fc-white);
+  color: var(--fc-navy-700);
+  border-color: var(--fc-line-strong);
+}
+.buttonSecondary:hover:not(:disabled) { background: var(--fc-blue-050); border-color: var(--fc-blue-500); }
+
+.buttonQuiet {
+  background: transparent;
+  border-color: transparent;
+  color: var(--fc-navy-700);
+  padding: 0 var(--fc-space-2);
+}
+.buttonQuiet:hover:not(:disabled) { background: var(--fc-blue-050); }
+
+.buttonDanger {
+  background: var(--fc-white);
+  color: var(--fc-critical);
+  border-color: var(--fc-critical-line);
+}
+.buttonDanger:hover:not(:disabled) { background: var(--fc-critical-bg); }
+
+/* ---------- Modal de auditoria ---------- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--fc-space-6) var(--fc-space-4);
+  background: rgba(6, 26, 51, 0.62);
+  overflow-y: auto;
+}
+
+.dialog {
+  width: min(720px, 100%);
+  background: var(--fc-white);
+  border: 1px solid var(--fc-navy-700);
+  border-radius: var(--fc-radius);
+  box-shadow: var(--fc-shadow-overlay);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--fc-space-10));
+}
+
+.dialogHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fc-space-4);
+  padding: var(--fc-space-4) var(--fc-space-5);
+  background: var(--fc-navy-800);
+  color: var(--fc-ink-inverse);
+}
+
+.dialogHeading { flex: 1; min-width: 0; }
+
+.dialogEyebrow {
+  display: block;
+  font-size: var(--fc-text-meta);
+  font-weight: 700;
+  letter-spacing: var(--fc-tracking-label);
+  text-transform: uppercase;
+  color: var(--fc-ink-inverse-muted);
+}
+
+.dialogTitle {
+  font-size: var(--fc-text-title);
+  color: var(--fc-ink-inverse);
+  overflow-wrap: anywhere;
+}
+
+.dialogSource {
+  display: block;
+  margin-top: var(--fc-space-1);
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-inverse-muted);
+  overflow-wrap: anywhere;
+}
+
+.dialogClose {
+  min-width: var(--fc-touch-target);
+  min-height: var(--fc-touch-target);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--fc-radius-sm);
+  color: var(--fc-ink-inverse);
+  background: transparent;
+}
+.dialogClose:hover { background: rgba(255, 255, 255, 0.12); }
+
+.dialogBody {
+  padding: var(--fc-space-4) var(--fc-space-5) var(--fc-space-5);
+  overflow-y: auto;
+}
+
+.dialogFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--fc-space-3);
+  padding: var(--fc-space-3) var(--fc-space-5);
+  border-top: var(--fc-border);
+  background: var(--fc-surface-header);
+}
+
+@media (max-width: 620px) {
+  .backdrop { padding: 0; align-items: stretch; }
+  .dialog { width: 100%; max-height: 100vh; border-radius: 0; border-width: 0; }
+}

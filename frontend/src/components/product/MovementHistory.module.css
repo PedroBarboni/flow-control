@@ -1,0 +1,153 @@
+/*
+ * Histórico imutável. Recolhido por padrão: é consulta de auditoria, não
+ * leitura de rotina — quem abre a peça quer a rota, não o arquivo.
+ */
+
+.panel {
+  background: var(--fc-white);
+  border: var(--fc-border);
+  border-left: 4px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius);
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-3);
+  width: 100%;
+  min-height: var(--fc-touch-target);
+  padding: var(--fc-space-4);
+  color: var(--fc-ink-strong);
+}
+
+.head:hover { background: var(--fc-surface-sunken); }
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.headText h3 {
+  margin: 0;
+  font-size: var(--fc-text-lead);
+}
+
+.headCount {
+  font-size: var(--fc-text-strong);
+  font-weight: 700;
+  color: var(--fc-ink-muted);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-3);
+  padding: 0 var(--fc-space-4) var(--fc-space-4);
+  border-top: var(--fc-border-soft);
+  padding-top: var(--fc-space-4);
+  min-width: 0;
+}
+
+.note {
+  max-width: 76ch;
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+}
+
+.stale {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-2) var(--fc-space-3);
+  border: 1px solid var(--fc-attention-line);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-attention-bg);
+  font-size: var(--fc-text-body);
+  color: var(--fc-attention);
+}
+
+/* Tabela larga rola dentro do próprio painel; a página nunca rola de lado. */
+.tableWrap {
+  overflow-x: auto;
+  min-width: 0;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: var(--fc-text-body);
+}
+
+.table th {
+  padding: var(--fc-space-2) var(--fc-space-3);
+  border-bottom: 1px solid var(--fc-line-strong);
+  text-align: left;
+  white-space: nowrap;
+  font-size: var(--fc-text-meta);
+  font-weight: 600;
+  letter-spacing: var(--fc-tracking-label);
+  text-transform: uppercase;
+  color: var(--fc-ink-faint);
+}
+
+.table td {
+  padding: var(--fc-space-2) var(--fc-space-3);
+  border-bottom: var(--fc-border-soft);
+  vertical-align: top;
+}
+
+.rowUnmatched { background: var(--fc-attention-bg); }
+.rowUnmatched .cellNote { color: var(--fc-attention); }
+
+.cellDate { white-space: nowrap; color: var(--fc-ink-muted); }
+.cellLot { white-space: nowrap; font-family: var(--fc-font-mono); font-size: var(--fc-text-meta); }
+.cellNumber { text-align: right; white-space: nowrap; }
+.cellNote { color: var(--fc-ink-muted); overflow-wrap: anywhere; }
+
+.type {
+  display: block;
+  font-weight: 600;
+  color: var(--fc-ink-strong);
+}
+
+.process {
+  display: inline-block;
+  margin-right: var(--fc-space-2);
+  font-family: var(--fc-font-mono);
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+}
+
+.next {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-faint);
+}
+
+.more {
+  align-self: flex-start;
+  min-height: var(--fc-touch-target);
+  padding: 0 var(--fc-space-4);
+  border: 1px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  font-size: var(--fc-text-body);
+  font-weight: 700;
+  color: var(--fc-navy-700);
+}
+
+.more:hover { border-color: var(--fc-blue-500); background: var(--fc-blue-050); }
+.more:disabled { opacity: 0.6; }
+
+.end {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-faint);
+}
+
+@media (max-width: 620px) {
+  .head { padding: var(--fc-space-3); }
+  .body { padding: var(--fc-space-3); }
+}

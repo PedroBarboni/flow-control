@@ -1,0 +1,184 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-4);
+  padding: var(--fc-space-4);
+  background: var(--fc-white);
+  border: var(--fc-border);
+  border-top: 3px solid var(--fc-navy-700);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--fc-space-4);
+  flex-wrap: wrap;
+  padding-bottom: var(--fc-space-3);
+  border-bottom: var(--fc-border);
+}
+
+.headNote {
+  margin-top: var(--fc-space-2);
+  max-width: 60ch;
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+}
+
+.reload {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  min-height: var(--fc-touch-target);
+  padding: 0 var(--fc-space-4);
+  border: 1px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  color: var(--fc-navy-700);
+  font-size: var(--fc-text-body);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.reload:hover { border-color: var(--fc-blue-500); background: var(--fc-blue-050); }
+.reload:disabled { opacity: 0.6; }
+
+.counters {
+  display: flex;
+  gap: var(--fc-space-5);
+  flex-wrap: wrap;
+}
+
+.counters dt {
+  font-size: var(--fc-text-meta);
+  font-weight: 700;
+  letter-spacing: var(--fc-tracking-label);
+  text-transform: uppercase;
+  color: var(--fc-ink-faint);
+}
+
+.counters dd {
+  margin: 0;
+  font-size: var(--fc-text-figure);
+  font-weight: 700;
+}
+
+.counter_em_processo dd { color: var(--fc-teal-700); }
+.counter_fechado dd { color: var(--fc-ink-strong); }
+.counter_consumido dd { color: var(--fc-ink-muted); }
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-5);
+}
+
+.groupTitle {
+  margin: 0 0 var(--fc-space-3);
+  font-size: var(--fc-text-lead);
+  text-transform: uppercase;
+  letter-spacing: var(--fc-tracking-label);
+  color: var(--fc-ink-strong);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--fc-space-3);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-3);
+  border: var(--fc-border);
+  border-left: 4px solid var(--fc-line-strong);
+  background: var(--fc-white);
+  min-width: 0;
+}
+
+.card_em_processo { border-left-color: var(--fc-teal-700); }
+.card_consumido { background: var(--fc-surface-header); }
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fc-space-2);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--fc-space-2);
+  border: 1px solid var(--fc-neutral-line);
+  font-size: var(--fc-text-meta);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--fc-ink-muted);
+}
+
+.badge_em_processo { border-color: var(--fc-teal-700); color: var(--fc-teal-700); }
+.badge_fechado { border-color: var(--fc-line-strong); color: var(--fc-ink-strong); }
+.badge_consumido { border-color: var(--fc-neutral-line); color: var(--fc-ink-faint); }
+
+.cardLot {
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-strong);
+}
+
+.cardProduct {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fc-space-2);
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: var(--fc-text-lead);
+  font-weight: 700;
+  color: var(--fc-navy-700);
+  text-align: left;
+  cursor: pointer;
+}
+
+.cardProduct:hover { color: var(--fc-blue-500); }
+
+.cardData {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--fc-space-2);
+}
+
+.cardData dt {
+  font-size: var(--fc-text-meta);
+  font-weight: 700;
+  letter-spacing: var(--fc-tracking-label);
+  text-transform: uppercase;
+  color: var(--fc-ink-faint);
+}
+
+.cardData dd {
+  margin: 0;
+  font-size: var(--fc-text-strong);
+  color: var(--fc-ink-strong);
+}
+
+.detailButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fc-space-2);
+  min-height: var(--fc-touch-target);
+  padding: 0 var(--fc-space-4);
+  border: 1px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  color: var(--fc-navy-700);
+  font-size: var(--fc-text-body);
+  font-weight: 700;
+}
+
+.detailButton:hover { border-color: var(--fc-blue-500); background: var(--fc-blue-050); }

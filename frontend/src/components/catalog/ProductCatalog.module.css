@@ -1,0 +1,210 @@
+/*
+ * Catálogo tipográfico. As peças não têm imagem: a identificação é o nome,
+ * o código oficial e os números de produção.
+ */
+
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-5);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--fc-space-4);
+  flex-wrap: wrap;
+}
+
+.headerNote {
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+}
+
+.families {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-6);
+}
+
+.familyHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-3);
+  margin-bottom: var(--fc-space-3);
+}
+
+.familyHeader h3 {
+  font-size: var(--fc-text-meta);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fc-ink-muted);
+}
+
+.familyHeader::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--fc-line);
+}
+
+.familyCount {
+  order: 3;
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-faint);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--fc-space-4);
+}
+
+/* ---------- Card tipográfico ---------- */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-4);
+  min-height: 168px;
+  padding: var(--fc-space-5);
+  background: var(--fc-white);
+  border: var(--fc-border);
+  border-left: 1px solid var(--fc-line);
+  border-radius: var(--fc-radius);
+  color: var(--fc-ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: var(--fc-line-strong);
+  background: var(--fc-surface-header);
+}
+
+/* Âmbar é sempre divergência; vermelho é sempre perda crítica. */
+.cardAttention { border-left: 4px solid var(--fc-attention); }
+.cardAttention:hover { border-left-color: var(--fc-attention); }
+.cardCritical { border-left: 4px solid var(--fc-critical); }
+.cardCritical:hover { border-left-color: var(--fc-critical); }
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-1);
+}
+
+.cardName {
+  font-size: var(--fc-text-lead);
+  font-weight: 600;
+  line-height: var(--fc-leading-tight);
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.cardCode {
+  font-family: var(--fc-font-mono);
+  font-size: var(--fc-text-meta);
+  letter-spacing: 0.01em;
+  color: var(--fc-ink-muted);
+}
+
+.cardMaterial {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+}
+
+.cardFigures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--fc-space-4);
+  margin-top: auto;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-1);
+  min-width: 0;
+}
+
+.figureLabel {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+}
+
+.figureValue {
+  display: flex;
+  align-items: baseline;
+  gap: var(--fc-space-1);
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-strong);
+  font-weight: 600;
+  line-height: var(--fc-leading-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.figureValue small {
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-meta);
+  font-weight: 400;
+  color: var(--fc-ink-muted);
+}
+
+.figureProcess .figureValue { color: var(--fc-blue-600); }
+
+/* Ausência de dado nunca vira zero, e nunca compete com um número real. */
+.figureMissing {
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-body);
+  font-weight: 400;
+  color: var(--fc-ink-muted);
+}
+
+.figureNote {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-attention);
+  overflow-wrap: anywhere;
+}
+
+.cardAlert {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-2) var(--fc-space-3);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-attention-bg);
+  color: var(--fc-attention);
+  font-size: var(--fc-text-meta);
+  overflow-wrap: anywhere;
+}
+
+.cardAlertCritical {
+  background: var(--fc-critical-bg);
+  color: var(--fc-critical);
+}
+
+.cardAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fc-space-2);
+  min-height: 28px;
+  font-size: var(--fc-text-body);
+  font-weight: 500;
+  color: var(--fc-blue-600);
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+
+@media (max-width: 620px) {
+  .grid { grid-template-columns: 1fr; }
+  .header { align-items: flex-start; flex-direction: column; }
+}

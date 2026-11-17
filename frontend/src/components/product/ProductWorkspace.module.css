@@ -1,0 +1,495 @@
+/*
+ * Controle da peça: uma única tela contextual.
+ * Contexto → alertas → lotes/WIP → rota → material e consumo.
+ */
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-5);
+}
+
+/* ---------- Contexto ---------- */
+.context {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-5);
+  padding: var(--fc-space-5);
+  background: var(--fc-white);
+  border: var(--fc-border);
+  border-radius: var(--fc-radius);
+}
+
+.contextIdentity {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-5);
+  flex-wrap: wrap;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  min-height: var(--fc-touch-target);
+  padding: 0 var(--fc-space-4);
+  border: 1px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  color: var(--fc-ink-muted);
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-body);
+  font-weight: 500;
+}
+
+.back:hover { border-color: var(--fc-blue-500); color: var(--fc-blue-600); background: var(--fc-blue-050); }
+.back:focus-visible { box-shadow: var(--fc-focus-ring); }
+
+.contextName {
+  font-size: var(--fc-text-title-lg);
+  font-weight: 600;
+  line-height: var(--fc-leading-tight);
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.contextMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  flex-wrap: wrap;
+  font-family: var(--fc-font-mono);
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+}
+
+.contextControls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  align-items: end;
+  gap: var(--fc-space-5);
+  padding-top: var(--fc-space-4);
+  border-top: var(--fc-border-soft);
+}
+
+.contextField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-1);
+  min-width: 0;
+}
+
+.contextField select {
+  min-height: var(--fc-touch-target);
+  padding: 0 var(--fc-space-3);
+  border: 1px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  color: var(--fc-ink);
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-base);
+}
+
+.contextValue {
+  display: block;
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-strong);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.contextLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fc-space-2);
+  min-height: var(--fc-touch-target);
+  padding: 0 var(--fc-space-4);
+  border: 1px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  color: var(--fc-blue-600);
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-body);
+  font-weight: 500;
+}
+
+.contextLink:hover { border-color: var(--fc-blue-500); background: var(--fc-blue-050); }
+.contextLink:focus-visible { box-shadow: var(--fc-focus-ring); }
+
+/* ---------- Alertas ---------- */
+.alerts ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+}
+
+.alerts li,
+.alertNormal {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-3) var(--fc-space-4);
+  border-radius: var(--fc-radius-sm);
+  font-size: var(--fc-text-body);
+  overflow-wrap: anywhere;
+}
+
+.alertAttention {
+  background: var(--fc-attention-bg);
+  color: var(--fc-attention);
+}
+
+.alertCritical {
+  background: var(--fc-critical-bg);
+  color: var(--fc-critical);
+}
+
+.alertNormal {
+  background: var(--fc-normal-bg);
+  color: var(--fc-normal);
+}
+
+/* ---------- Painéis ---------- */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-4);
+  padding: var(--fc-space-5);
+  background: var(--fc-white);
+  border: var(--fc-border);
+  border-radius: var(--fc-radius);
+}
+
+.panelHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--fc-space-5);
+  flex-wrap: wrap;
+}
+
+.panelNote {
+  margin-top: var(--fc-space-1);
+  max-width: 70ch;
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+}
+
+.panelFigures {
+  display: flex;
+  gap: var(--fc-space-6);
+  flex-wrap: wrap;
+}
+
+.panelFigure {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.panelFigure strong {
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-figure);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--fc-ink-strong);
+}
+
+.panelFigureProcess strong { color: var(--fc-blue-600); }
+.panelFigureAttention strong { color: var(--fc-attention); }
+
+.panelFilter {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-3) var(--fc-space-4);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-blue-050);
+  color: var(--fc-blue-600);
+  font-size: var(--fc-text-body);
+}
+
+.panelFilter button {
+  margin-left: var(--fc-space-2);
+  border: none;
+  background: none;
+  color: var(--fc-blue-600);
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-body);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.panelAlert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-3) var(--fc-space-4);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-critical-bg);
+  color: var(--fc-critical);
+  font-size: var(--fc-text-body);
+  overflow-wrap: anywhere;
+}
+
+.panelLoading,
+.panelEmpty {
+  padding: var(--fc-space-4) 0;
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+}
+
+.auditButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  min-height: var(--fc-touch-target);
+  padding: 0 var(--fc-space-4);
+  border: 1px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  color: var(--fc-blue-600);
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-body);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.auditButton:hover { border-color: var(--fc-blue-500); background: var(--fc-blue-050); }
+
+/* ---------- Posição dos lotes ---------- */
+.lotRail {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: var(--fc-space-3);
+}
+
+.lotChip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-4);
+  border: var(--fc-border);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  text-align: left;
+}
+
+.lotChip:hover { border-color: var(--fc-line-strong); }
+
+.lotChipActive {
+  border-color: var(--fc-blue-500);
+  background: var(--fc-blue-050);
+}
+
+.lotChipDerived {
+  border-left: 4px solid var(--fc-attention);
+  background: var(--fc-attention-bg);
+}
+
+.lotChipHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fc-space-2);
+}
+
+.lotChipId {
+  font-family: var(--fc-font-mono);
+  font-size: var(--fc-text-lead);
+  font-weight: 600;
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.lotChipData {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+}
+
+.lotChipData b {
+  font-weight: 500;
+  color: var(--fc-ink);
+}
+
+.lotChipData .fc-mono,
+.lotChipData span {
+  font-variant-numeric: tabular-nums;
+}
+
+.emptyRail {
+  padding: var(--fc-space-4) 0;
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+}
+
+/* ---------- Balanço do vergalhão ---------- */
+.balanceBand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-3);
+}
+
+.bandTitle {
+  font-size: var(--fc-text-meta);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fc-ink-muted);
+}
+
+.balanceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--fc-space-3);
+}
+
+.balanceCell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-1);
+  padding: var(--fc-space-4);
+  border: var(--fc-border);
+  border-left: 4px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  min-width: 0;
+}
+
+.balanceCell header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fc-space-2);
+}
+
+/* A origem do número é sempre declarada: oficial, calculado ou estimado. */
+.originTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px var(--fc-space-2);
+  border: 1px solid var(--fc-line);
+  border-radius: var(--fc-radius-pill);
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+  white-space: nowrap;
+}
+
+.balanceValue {
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-figure);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.balanceNote {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+  overflow-wrap: anywhere;
+}
+
+.origin_oficial { border-left-color: var(--fc-navy-700); }
+.origin_oficial .originTag { border-color: var(--fc-navy-700); color: var(--fc-navy-700); }
+
+.origin_calculado { border-left-color: var(--fc-blue-500); }
+.origin_calculado .originTag { border-color: var(--fc-info-line); color: var(--fc-blue-600); }
+.origin_calculado .balanceValue { color: var(--fc-blue-600); }
+
+.origin_estimado { border-left-color: var(--fc-attention); }
+.origin_estimado .originTag { border-color: var(--fc-attention-line); color: var(--fc-attention); }
+.origin_estimado .balanceValue { color: var(--fc-attention); }
+
+.origin_indisponivel { border-left-color: var(--fc-line-strong); background: var(--fc-surface-header); }
+.origin_indisponivel .balanceValue { font-size: var(--fc-text-lead); font-weight: 400; color: var(--fc-ink-muted); }
+
+/* ---------- Trilho de transferências ---------- */
+.traceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: var(--fc-space-3);
+}
+
+.traceCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-4);
+  border: var(--fc-border);
+  border-left: 4px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+}
+
+.traceCardActive {
+  border-left-color: var(--fc-blue-500);
+  background: var(--fc-blue-050);
+}
+
+.traceCard header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.traceCard header strong {
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-lead);
+  font-weight: 600;
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.traceCard dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--fc-space-2) var(--fc-space-3);
+  padding-top: var(--fc-space-2);
+  border-top: var(--fc-border-soft);
+}
+
+.traceCard dt {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+}
+
+.traceCard dd {
+  margin: 0;
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-body);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.traceCalculation {
+  margin: 0;
+  padding-top: var(--fc-space-2);
+  border-top: var(--fc-border-soft);
+  font-size: var(--fc-text-meta);
+  color: var(--fc-attention);
+}
+
+@media (max-width: 620px) {
+  .lotRail,
+  .balanceGrid,
+  .traceGrid { grid-template-columns: 1fr; }
+  .contextControls { grid-template-columns: 1fr; }
+  .contextLink { width: 100%; }
+  .panelFigures { gap: var(--fc-space-4); }
+}

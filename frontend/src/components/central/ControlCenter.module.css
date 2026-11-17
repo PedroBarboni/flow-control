@@ -1,0 +1,143 @@
+/*
+ * Trilho de situação da Central. Sem hero, sem números decorativos:
+ * cada bloco responde a uma pergunta operacional.
+ *
+ * Cartões separados (não uma grade colada): na luz do chão de fábrica o
+ * espaço entre eles separa melhor que uma linha de 1px.
+ */
+
+.rail {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--fc-space-4);
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+  min-height: 132px;
+  padding: var(--fc-space-5);
+  background: var(--fc-white);
+  border: var(--fc-border);
+  border-radius: var(--fc-radius);
+  color: var(--fc-ink);
+  text-align: left;
+}
+
+.tileButton { cursor: pointer; }
+
+.tileButton:hover {
+  border-color: var(--fc-line-strong);
+  background: var(--fc-surface-header);
+}
+
+.tileHead {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  color: var(--fc-ink-muted);
+}
+
+.tileLabel {
+  font-size: var(--fc-text-meta);
+  font-weight: 600;
+  letter-spacing: var(--fc-tracking-label);
+  text-transform: uppercase;
+}
+
+.tileValue {
+  display: flex;
+  align-items: baseline;
+  gap: var(--fc-space-2);
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-figure-lg);
+  font-weight: 600;
+  line-height: var(--fc-leading-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.tileValue small {
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-body);
+  font-weight: 400;
+  color: var(--fc-ink-muted);
+}
+
+/*
+ * Valor em palavra ("Concluído", "Consultando…") não é quantidade: sai da
+ * monoespaçada gigante para não competir com os números do painel.
+ */
+.tileValueText {
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-title-lg);
+  font-weight: 600;
+  line-height: var(--fc-leading-snug);
+}
+
+.tileNote {
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+  overflow-wrap: anywhere;
+}
+
+.tileAction {
+  display: flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  margin-top: auto;
+  padding-top: var(--fc-space-2);
+  font-size: var(--fc-text-body);
+  font-weight: 500;
+  color: var(--fc-blue-600);
+}
+
+/*
+ * Tons de estado: faixa lateral, não borda superior. A cor entra à esquerda,
+ * onde o olho começa a ler a linha.
+ */
+.tone_neutral { border-left: 1px solid var(--fc-line); }
+
+.tone_normal { border-left: 4px solid var(--fc-normal); }
+.tone_normal .tileValue { color: var(--fc-normal); }
+
+.tone_process { border-left: 4px solid var(--fc-blue-500); }
+.tone_process .tileValue { color: var(--fc-blue-600); }
+
+.tone_attention { border-left: 4px solid var(--fc-attention); }
+.tone_attention .tileValue { color: var(--fc-attention); }
+
+.tone_critical { border-left: 4px solid var(--fc-critical); }
+.tone_critical .tileValue { color: var(--fc-critical); }
+
+/* Barra de progresso do inventário — o único gráfico do painel. */
+.tileProgress {
+  display: flex;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--fc-surface-sunken);
+  overflow: hidden;
+}
+
+.tileProgressFill {
+  background: var(--fc-normal);
+  border-radius: 3px;
+}
+
+.tileProgressPending .tileProgressFill { background: var(--fc-attention); }
+
+@media (max-width: 1280px) {
+  .rail { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 860px) {
+  .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .rail { grid-template-columns: 1fr; }
+  .tile { min-height: 108px; }
+}

@@ -1,0 +1,120 @@
+/*
+ * Flow Control — tokens do sistema de controle industrial.
+ * Camada única de verdade para cor, tipografia, espaçamento e estados.
+ * Nenhuma regra visual pode redefinir cor fora deste arquivo.
+ *
+ * Cor em oklch: claridade e croma constantes por família, variando só o
+ * matiz. Isso mantém os estados (normal, atenção, crítico) com o mesmo peso
+ * visual sob a luz forte do chão de fábrica.
+ */
+
+:root {
+  /* Estrutura institucional — barra superior e ações primárias */
+  --fc-navy-900: oklch(0.16 0.02 250);
+  --fc-navy-800: oklch(0.19 0.02 250);
+  --fc-navy-700: oklch(0.21 0.02 250);
+  --fc-navy-600: oklch(0.27 0.02 250);
+
+  /* Navegação, seleção e informação */
+  --fc-blue-600: oklch(0.40 0.11 255);
+  --fc-blue-500: oklch(0.45 0.13 255);
+  --fc-blue-100: oklch(0.92 0.02 255);
+  --fc-blue-050: oklch(0.97 0.012 250);
+  --fc-teal-700: oklch(0.42 0.09 220);
+  --fc-teal-600: oklch(0.50 0.10 220);
+  --fc-teal-100: oklch(0.95 0.03 200);
+
+  /* Superfícies */
+  --fc-white: oklch(1 0 0);
+  --fc-surface: oklch(0.97 0.004 90);
+  --fc-surface-sunken: oklch(0.945 0.004 90);
+  --fc-surface-header: oklch(0.985 0.002 90);
+  --fc-line: oklch(0.91 0.006 90);
+  --fc-line-strong: oklch(0.84 0.006 90);
+  --fc-line-soft: oklch(0.94 0.005 90);
+
+  /* Texto */
+  --fc-ink: oklch(0.24 0.01 90);
+  --fc-ink-strong: oklch(0.18 0.01 90);
+  --fc-ink-muted: oklch(0.52 0.01 90);
+  --fc-ink-faint: oklch(0.58 0.01 90);
+  --fc-ink-inverse: oklch(0.98 0.003 90);
+  --fc-ink-inverse-muted: oklch(0.76 0.02 250);
+
+  /* Estados semânticos — verde só para normal/concluído */
+  --fc-normal: oklch(0.48 0.13 145);
+  --fc-normal-bg: oklch(0.96 0.03 150);
+  --fc-normal-line: oklch(0.88 0.05 150);
+
+  /* Âmbar só para atenção, espera e divergência */
+  --fc-attention: oklch(0.52 0.14 62);
+  --fc-attention-bg: oklch(0.97 0.03 70);
+  --fc-attention-line: oklch(0.88 0.07 68);
+
+  /* Vermelho só para crítico e erro */
+  --fc-critical: oklch(0.50 0.19 28);
+  --fc-critical-bg: oklch(0.96 0.03 28);
+  --fc-critical-line: oklch(0.87 0.07 28);
+
+  /* Informação neutra / sem dados */
+  --fc-info: var(--fc-blue-600);
+  --fc-info-bg: var(--fc-blue-050);
+  --fc-info-line: oklch(0.86 0.04 255);
+  --fc-neutral: var(--fc-ink-muted);
+  --fc-neutral-bg: var(--fc-surface-sunken);
+  --fc-neutral-line: var(--fc-line);
+
+  /* Tipografia — empacotada em /assets/fonts, sem dependência de rede.
+     `figure` é a mesma Inter da interface: o alinhamento de coluna vem dos
+     dígitos tabulares, não de uma monoespaçada. `mono` fica só para código. */
+  --fc-font-ui: "Inter Variable", "Segoe UI", system-ui, sans-serif;
+  --fc-font-figure: "Inter Variable", "Segoe UI", system-ui, sans-serif;
+  --fc-font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --fc-text-meta: 0.75rem;      /* 12px — apenas metadados e legendas */
+  --fc-text-body: 0.875rem;     /* 14px — texto operacional mínimo */
+  --fc-text-base: 0.9375rem;    /* 15px — texto operacional padrão */
+  --fc-text-lead: 1.0625rem;    /* 17px */
+  --fc-text-strong: 1.1875rem;  /* 19px — indicadores */
+  --fc-text-figure: 1.5rem;     /* 24px — quantidades */
+  --fc-text-figure-lg: 2.5rem;  /* 40px — indicador principal do painel */
+  --fc-text-title: 1.1875rem;   /* 19px — títulos de seção */
+  --fc-text-title-lg: 1.5rem;   /* 24px — título de página */
+
+  --fc-leading-tight: 1.15;
+  --fc-leading-snug: 1.3;
+  --fc-leading-base: 1.45;
+
+  --fc-tracking-label: 0.06em;
+
+  /* Espaçamento */
+  --fc-space-1: 0.25rem;
+  --fc-space-2: 0.5rem;
+  --fc-space-3: 0.75rem;
+  --fc-space-4: 1rem;
+  --fc-space-5: 1.25rem;
+  --fc-space-6: 1.5rem;
+  --fc-space-8: 2rem;
+  --fc-space-10: 2.5rem;
+
+  /* Bordas — curvatura suave, o suficiente para separar cartão do fundo */
+  --fc-radius: 12px;
+  --fc-radius-sm: 8px;
+  --fc-radius-pill: 999px;
+  --fc-border: 1px solid var(--fc-line);
+  --fc-border-strong: 1px solid var(--fc-line-strong);
+  --fc-border-soft: 1px solid var(--fc-line-soft);
+
+  /* Elevação mínima — apenas para camadas sobrepostas */
+  --fc-shadow-overlay: 0 12px 32px oklch(0.16 0.02 250 / 0.28);
+
+  /* Alvos e foco */
+  --fc-touch-target: 44px;
+  --fc-focus-ring: 0 0 0 2px var(--fc-white), 0 0 0 4px var(--fc-blue-500);
+  --fc-focus-ring-inverse: 0 0 0 2px var(--fc-navy-800), 0 0 0 4px var(--fc-blue-100);
+
+  /* Layout */
+  --fc-shell-max: 1600px;
+  --fc-header-height: 68px;
+  --fc-nav-height: 52px;
+}

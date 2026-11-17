@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B2545" />
+    <meta name="description" content="Central de controle e rastreabilidade do fluxo produtivo Flow." />
+    <!-- Aba do navegador é clara: aqui vai a marca azul; a branca é do cabeçalho. -->
+    <link rel="icon" href="/assets/logo.png" />
+    <title>Flow · Central de Controle Industrial</title>
+    <script>
+      (() => {
+        const report = (message, stack = "") => {
+          const payload = { message: String(message || "Erro desconhecido"), stack: String(stack || ""), url: location.href };
+          fetch("/api/client-errors", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(() => {});
+          setTimeout(() => {
+            if (document.getElementById("fc-client-error")) return;
+            const panel = document.createElement("pre");
+            panel.id = "fc-client-error";
+            panel.style.cssText = "margin:24px;padding:20px;border:2px solid #a4231c;background:#fbe4e2;color:#64150f;font:14px/1.5 Inter,Arial,sans-serif;white-space:pre-wrap";
+            panel.textContent = `Erro ao abrir o controle:\n${payload.message}\n\n${payload.stack}`;
+            document.body.appendChild(panel);
+          }, 0);
+        };
+        addEventListener("error", (event) => report(event.message, event.error?.stack));
+        addEventListener("unhandledrejection", (event) => report(event.reason?.message || event.reason, event.reason?.stack));
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

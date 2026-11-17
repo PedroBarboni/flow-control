@@ -1,0 +1,329 @@
+/*
+ * Rota de produção — uma operação por linha, do vergalhão ao pré-acabado.
+ * A etapa 00 é o vergalhão: é dela que sai tudo, então ela tem tratamento
+ * próprio (azul) e barra de consumo do lote.
+ */
+
+.route {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-4);
+}
+
+.routeHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--fc-space-6);
+  flex-wrap: wrap;
+}
+
+.routeSummary {
+  display: flex;
+  gap: var(--fc-space-6);
+  flex-wrap: wrap;
+}
+
+.routeSummary div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.routeSummary dt {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+}
+
+.routeSummary dd {
+  margin: 0;
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-strong);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--fc-ink-strong);
+}
+
+.routeSummary small {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+}
+
+.routeSummaryProcess dd { color: var(--fc-blue-600); }
+
+.routeAlert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fc-space-2);
+  padding: var(--fc-space-3) var(--fc-space-4);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-attention-bg);
+  color: var(--fc-attention);
+  font-size: var(--fc-text-body);
+  overflow-wrap: anywhere;
+}
+
+.routeEmpty {
+  padding: var(--fc-space-5) 0;
+  font-size: var(--fc-text-base);
+  color: var(--fc-ink-muted);
+}
+
+.stages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-3);
+}
+
+/* ---------- Etapa ---------- */
+.stage {
+  display: grid;
+  grid-template-columns: 56px minmax(160px, 200px) minmax(190px, 230px) 1fr auto;
+  align-items: start;
+  gap: var(--fc-space-5);
+  min-height: 104px;
+  padding: var(--fc-space-5);
+  background: var(--fc-white);
+  border: var(--fc-border);
+  border-left: 4px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius);
+  min-width: 0;
+}
+
+.stage_normal { border-left-color: var(--fc-normal); }
+.stage_attention { border-left-color: var(--fc-attention); }
+.stage_critical { border-left-color: var(--fc-critical); }
+.stage_blocked { border-left-color: var(--fc-critical); }
+.stage_empty {
+  border-left-color: var(--fc-line-strong);
+  background: var(--fc-surface-header);
+}
+
+/* Etapa 00: a origem de tudo é o vergalhão, e ela se distingue por isso. */
+.stageMaterial {
+  background: var(--fc-blue-050);
+  border-color: var(--fc-info-line);
+  border-left-color: var(--fc-blue-500);
+}
+
+.stageIndex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fc-space-2);
+  min-height: 40px;
+  font-family: var(--fc-font-mono);
+  font-size: var(--fc-text-figure);
+  font-weight: 600;
+  color: var(--fc-ink-muted);
+}
+
+.stageMaterial .stageIndex { color: var(--fc-blue-500); }
+
+.stageIdentity {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.stageCode {
+  font-family: var(--fc-font-mono);
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+}
+
+.stageName {
+  font-size: var(--fc-text-lead);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.stageMachine {
+  font-size: var(--fc-text-body);
+  color: var(--fc-ink-muted);
+  overflow-wrap: anywhere;
+}
+
+.stageStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  margin-top: var(--fc-space-1);
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+  align-self: flex-start;
+}
+
+.status_normal { color: var(--fc-normal); }
+.status_attention { color: var(--fc-attention); }
+.status_critical { color: var(--fc-critical); }
+
+.stageStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--fc-space-4);
+  min-width: 0;
+}
+
+.stageStats div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.stageStats dt {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+}
+
+.stageStats dd {
+  margin: 0;
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-strong);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--fc-ink-strong);
+  overflow-wrap: anywhere;
+}
+
+.stageStats small {
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-muted);
+  overflow-wrap: anywhere;
+}
+
+/*
+ * Saldo parado na etapa AGORA — o número que o chão de fábrica procura.
+ * Painel próprio, fora da grade de acumulados, com a figura no maior corpo
+ * do cartão: é o único valor aqui que responde "quanto tem na bancada".
+ */
+.stageFloor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-1);
+  padding: var(--fc-space-3);
+  border: 1px solid transparent;
+  border-radius: var(--fc-radius-sm);
+  min-width: 0;
+}
+
+.stageFloorLabel {
+  font-size: var(--fc-text-meta);
+  font-weight: 600;
+  letter-spacing: var(--fc-tracking-label);
+  text-transform: uppercase;
+}
+
+.stageFloorValue {
+  font-size: var(--fc-text-figure);
+  font-weight: 700;
+  line-height: var(--fc-leading-tight);
+}
+
+.stageFloorNote {
+  font-size: var(--fc-text-meta);
+  overflow-wrap: anywhere;
+}
+
+/* Tem peça parada e ela tem lote: azul, situação normal de fila. */
+.stageFloorActive {
+  border-color: var(--fc-info-line);
+  background: var(--fc-blue-050);
+}
+
+.stageFloorActive .stageFloorLabel { color: var(--fc-blue-600); }
+.stageFloorActive .stageFloorValue { color: var(--fc-blue-600); }
+.stageFloorActive .stageFloorNote { color: var(--fc-blue-600); }
+
+/* Tem peça parada sem lote identificado: âmbar, precisa de conferência. */
+.stageFloorAttention {
+  border-color: var(--fc-attention-line);
+  background: var(--fc-attention-bg);
+}
+
+.stageFloorAttention .stageFloorLabel { color: var(--fc-attention); }
+.stageFloorAttention .stageFloorValue { color: var(--fc-attention); }
+.stageFloorAttention .stageFloorNote { color: var(--fc-attention); }
+
+/* Bancada vazia: continua ocupando o mesmo espaço, para a coluna não dançar
+   de etapa para etapa, mas sem chamar atenção de alerta. */
+.stageFloorEmpty {
+  border-color: var(--fc-line);
+  background: var(--fc-surface-sunken);
+}
+
+.stageFloorEmpty .stageFloorLabel { color: var(--fc-ink-faint); }
+.stageFloorEmpty .stageFloorValue { color: var(--fc-ink-muted); }
+.stageFloorEmpty .stageFloorNote { color: var(--fc-ink-faint); }
+
+.stageAudit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fc-space-2);
+  min-height: var(--fc-touch-target);
+  padding: 0 var(--fc-space-4);
+  border: 1px solid var(--fc-line-strong);
+  border-radius: var(--fc-radius-sm);
+  background: var(--fc-white);
+  color: var(--fc-blue-600);
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-body);
+  font-weight: 500;
+  white-space: nowrap;
+  align-self: center;
+}
+
+.stageAudit:hover { border-color: var(--fc-blue-500); background: var(--fc-blue-050); }
+
+/* Barra de consumo do lote de vergalhão, só na etapa 00. */
+.stageProgress {
+  grid-column: 2 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-2);
+}
+
+.stageProgressTrack {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--fc-blue-100);
+  overflow: hidden;
+}
+
+.stageProgressFill {
+  background: var(--fc-blue-500);
+  border-radius: 4px;
+}
+
+.stageProgressNote {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--fc-space-3);
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fc-text-meta);
+  color: var(--fc-blue-600);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1200px) {
+  .stage { grid-template-columns: 48px 1fr; }
+  .stageFloor { grid-column: 1 / -1; }
+  .stageStats { grid-column: 1 / -1; }
+  .stageProgress { grid-column: 1 / -1; }
+  .stageAudit { grid-column: 1 / -1; justify-content: center; }
+}
+
+@media (max-width: 620px) {
+  .stage { gap: var(--fc-space-3); padding: var(--fc-space-4); }
+  .routeSummary { gap: var(--fc-space-4); }
+  .stageProgressNote { flex-direction: column; gap: var(--fc-space-1); }
+}

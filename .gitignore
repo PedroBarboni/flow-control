@@ -1,0 +1,17 @@
+.env.local
+frontend/node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+
+.venv/
+.pytest_cache/
+.pnpm-store/
+.codex-tmp/
+.runtime-tmp/
+pip-build-tracker-*/
+pip-ephem-wheel-cache-*/
+pip-install-*/
+pip-target-*/
+frontend/tsconfig.tsbuildinfo
+

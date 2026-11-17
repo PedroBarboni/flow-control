@@ -1,0 +1,73 @@
+/*
+ * Contrato de acessibilidade e interação.
+ * Foco visível, alvos de 44px, estados que não dependem só de cor.
+ */
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--fc-focus-ring);
+  border-radius: var(--fc-radius-sm);
+}
+
+.fc-on-dark :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  box-shadow: var(--fc-focus-ring-inverse);
+}
+
+/* Alvo mínimo operacional; usável com luva em tablet. */
+.fc-target {
+  min-height: var(--fc-touch-target);
+  min-width: var(--fc-touch-target);
+}
+
+.fc-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fc-skip-link {
+  position: absolute;
+  left: var(--fc-space-3);
+  top: -100px;
+  z-index: 100;
+  padding: var(--fc-space-3) var(--fc-space-4);
+  background: var(--fc-white);
+  color: var(--fc-navy-700);
+  border: 2px solid var(--fc-blue-500);
+  font-weight: 700;
+  transition: top 120ms linear;
+}
+
+.fc-skip-link:focus {
+  top: var(--fc-space-3);
+}
+
+/* Barras de rolagem técnicas e visíveis. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fc-line-strong) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .fc-state,
+  .fc-target {
+    forced-color-adjust: auto;
+  }
+}

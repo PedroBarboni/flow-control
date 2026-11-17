@@ -1,0 +1,142 @@
+/*
+ * Reset e superfícies base. Sem gradientes decorativos, sem glassmorphism.
+ * A leitura padrão é clara, para ambiente industrial iluminado.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Contenção do estouro horizontal só no `body`, e com `clip` em vez de
+ * `hidden`: no elemento raiz, ou com `hidden`, a página vira um contêiner de
+ * rolagem e o `position: sticky` da faixa de comando para de funcionar — a
+ * navegação sumia ao rolar o catálogo.
+ */
+body {
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--fc-surface);
+  color: var(--fc-ink);
+  font-family: var(--fc-font-ui);
+  font-size: var(--fc-text-base);
+  line-height: var(--fc-leading-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 650;
+  line-height: var(--fc-leading-tight);
+  color: var(--fc-ink-strong);
+}
+
+h1 { font-size: var(--fc-text-title-lg); }
+h2 { font-size: var(--fc-text-title); }
+h3 { font-size: var(--fc-text-lead); }
+h4 { font-size: var(--fc-text-base); }
+
+p {
+  margin: 0;
+}
+
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+code,
+kbd,
+samp {
+  font-family: var(--fc-font-mono);
+  font-size: 0.95em;
+}
+
+svg {
+  flex: none;
+}
+
+/*
+ * Valor numérico operacional: peso, quantidade, percentual, registro.
+ * Dígito tabular da própria Inter — a coluna alinha e o número não dança
+ * quando o valor muda, sem o peso visual de uma monoespaçada.
+ */
+.fc-mono {
+  font-family: var(--fc-font-figure);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "cv05" 1;
+  letter-spacing: -0.005em;
+}
+
+/* Rótulo de seção — curto, técnico, nunca menor que 12px. */
+.fc-label {
+  font-size: var(--fc-text-meta);
+  font-weight: 600;
+  letter-spacing: var(--fc-tracking-label);
+  text-transform: uppercase;
+  color: var(--fc-ink-muted);
+}

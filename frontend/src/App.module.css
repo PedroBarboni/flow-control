@@ -1,0 +1,38 @@
+/* Casca da aplicação: largura útil, respiro técnico e rodapé de contexto. */
+
+.shell {
+  flex: 1;
+  width: 100%;
+  max-width: var(--fc-shell-max);
+  margin: 0 auto;
+  padding: var(--fc-space-6) var(--fc-space-8) var(--fc-space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fc-space-6);
+  min-width: 0;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fc-space-4);
+  flex-wrap: wrap;
+  max-width: var(--fc-shell-max);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--fc-space-4) var(--fc-space-8);
+  border-top: var(--fc-border);
+  font-size: var(--fc-text-meta);
+  color: var(--fc-ink-faint);
+}
+
+@media (max-width: 1100px) {
+  .shell { padding: var(--fc-space-5) var(--fc-space-5) var(--fc-space-8); }
+  .footer { padding: var(--fc-space-4) var(--fc-space-5); }
+}
+
+@media (max-width: 720px) {
+  .shell { padding: var(--fc-space-4) var(--fc-space-4) var(--fc-space-8); gap: var(--fc-space-5); }
+  .footer { padding: var(--fc-space-3) var(--fc-space-4); }
+}
